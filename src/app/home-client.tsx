@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useUser } from '@/contexts/UserContext';
 import { TopMenu } from '@/components/TopMenu';
 import { FooterSlim } from '@/components/FooterSlim';
-import { Onboarding } from '@/components/onboarding';
+import { Login } from '@/components/login';
 import { ClaimForm } from '@/components/claim-form';
 import SavedClaims from '@/components/SavedClaims';
 import { SavedClaim } from '@/lib/mockData';
@@ -21,7 +21,7 @@ function AppContent() {
   const [showUpsellModal, setShowUpsellModal] = useState(false);
   
   if (!user) {
-    return <Onboarding onComplete={setUser} />;
+    return <Login onLogin={setUser} />;
   }
 
   const handleLoadClaim = (claim: SavedClaim) => {
