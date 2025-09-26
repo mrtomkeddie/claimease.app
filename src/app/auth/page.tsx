@@ -286,7 +286,7 @@ function AuthForm() {
   const renderEmailStep = () => (
     <form onSubmit={(e) => { e.preventDefault(); handleContinue(); }} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-gray-300">Email Address</Label>
+        <Label htmlFor="email" className="text-foreground">Email Address</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
@@ -295,7 +295,7 @@ function AuthForm() {
             placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="pl-10 bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+            className="pl-10 bg-secondary border-border text-foreground placeholder-muted-foreground focus:ring-primary focus:border-primary"
             disabled={checkingEmail}
           />
         </div>
@@ -303,7 +303,7 @@ function AuthForm() {
       
       <Button 
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+        className="w-full btn-brand"
         disabled={checkingEmail}
       >
         {checkingEmail ? 'Checking...' : 'Continue'}
@@ -315,7 +315,7 @@ function AuthForm() {
   const renderLoginStep = () => (
     <form onSubmit={(e) => { e.preventDefault(); handleSignIn(); }} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="login-email" className="text-gray-300">Email Address</Label>
+        <Label htmlFor="login-email" className="text-foreground">Email Address</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
@@ -323,13 +323,13 @@ function AuthForm() {
             type="email"
             value={email}
             disabled
-            className="pl-10 bg-gray-700 border-gray-600 text-gray-300"
+            className="pl-10 bg-secondary border-border text-muted-foreground"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="login-password" className="text-gray-300">Password</Label>
+        <Label htmlFor="login-password" className="text-foreground">Password</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
@@ -338,12 +338,12 @@ function AuthForm() {
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="pl-10 pr-10 bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+            className="pl-10 pr-10 bg-secondary border-border text-foreground placeholder-muted-foreground focus:ring-primary focus:border-primary"
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+            className="absolute right-3 top-3 text-muted-foreground hover:text-foreground hover:bg-primary/10 rounded p-1"
           >
             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           </button>
@@ -354,14 +354,14 @@ function AuthForm() {
         <button
           type="button"
           onClick={() => setAuthStep('email')}
-          className="text-sm text-blue-400 hover:text-blue-300"
+          className="text-sm text-primary hover:text-primary/80"
         >
           ← Use a different email
         </button>
         <button
           type="button"
           onClick={handleForgotPassword}
-          className="text-sm text-blue-400 hover:text-blue-300"
+          className="text-sm text-primary hover:text-primary/80"
         >
           Forgot password?
         </button>
@@ -369,7 +369,7 @@ function AuthForm() {
 
       <Button 
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+        className="w-full btn-brand"
         disabled={loading}
       >
         {loading ? 'Signing in...' : 'Sign In'}
@@ -380,18 +380,18 @@ function AuthForm() {
   const renderSignupStep = () => (
     <form onSubmit={(e) => { e.preventDefault(); handleSignUp(); }} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="signup-email" className="text-gray-300">Email</Label>
+        <Label htmlFor="signup-email" className="text-foreground">Email</Label>
         <Input
           id="signup-email"
           type="email"
           value={email}
           disabled
-          className="bg-gray-700 border-gray-600 text-gray-300"
+          className="bg-secondary border-border text-muted-foreground"
         />
       </div>
       
       <div className="space-y-2">
-        <Label htmlFor="new-password" className="text-gray-300">Create Password</Label>
+        <Label htmlFor="new-password" className="text-foreground">Create Password</Label>
         <Input
           id="new-password"
           type="password"
@@ -400,12 +400,12 @@ function AuthForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
           disabled={loading}
-          className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+          className="bg-secondary border-border text-foreground placeholder-muted-foreground focus:ring-primary focus:border-primary"
         />
       </div>
       
       <div className="space-y-2">
-        <Label htmlFor="confirm-password" className="text-gray-300">Confirm Password</Label>
+        <Label htmlFor="confirm-password" className="text-foreground">Confirm Password</Label>
         <Input
           id="confirm-password"
           type="password"
@@ -414,7 +414,7 @@ function AuthForm() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
           disabled={loading}
-          className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+          className="bg-secondary border-border text-foreground placeholder-muted-foreground focus:ring-primary focus:border-primary"
         />
       </div>
       
@@ -422,7 +422,7 @@ function AuthForm() {
         <button
           type="button"
           onClick={() => setAuthStep('email')}
-          className="text-sm text-blue-400 hover:text-blue-300"
+          className="text-sm text-primary hover:text-primary/80"
         >
           ← Use a different email
         </button>
@@ -430,7 +430,7 @@ function AuthForm() {
       
       <Button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+        className="w-full btn-brand"
         disabled={loading}
       >
         {loading ? 'Creating account...' : 'Create account'}
@@ -439,7 +439,7 @@ function AuthForm() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary to-primary/20 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left side - Brand/Welcome */}
@@ -449,40 +449,40 @@ function AuthForm() {
             </div>
             
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-5xl font-bold text-white">
+              <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
                 Welcome to ClaimEase
               </h1>
-              <p className="text-xl text-gray-300 max-w-lg mx-auto lg:mx-0">
+              <p className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0">
                 Manage your claims with ease. Our streamlined platform helps you track, organize, and process claims efficiently.
               </p>
             </div>
 
             <div className="space-y-3 max-w-md mx-auto lg:mx-0">
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                <span className="text-gray-300">Track claims in real-time</span>
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span className="text-muted-foreground">Track claims in real-time</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                <span className="text-gray-300">Manage documents securely</span>
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span className="text-muted-foreground">Manage documents securely</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                <span className="text-gray-300">Get expert guidance</span>
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span className="text-muted-foreground">Get expert guidance</span>
               </div>
             </div>
           </div>
 
           {/* Right side - Auth Form */}
           <div>
-            <Card className="backdrop-blur-sm bg-gray-800/90 border-gray-700 shadow-2xl">
+            <Card className="backdrop-blur-sm bg-card/90 border-border shadow-2xl">
               <CardHeader className="space-y-1 text-center">
-                <CardTitle className="text-2xl text-white">
+                <CardTitle className="text-2xl text-foreground">
                   {authStep === 'email' && 'Get Started'}
                   {authStep === 'login' && 'Welcome Back'}
                   {authStep === 'signup' && 'Create Account'}
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-muted-foreground">
                   {authStep === 'email' && 'Enter your email to continue'}
                   {authStep === 'login' && 'Sign in to your account'}
                   {authStep === 'signup' && 'Create your ClaimEase account'}
