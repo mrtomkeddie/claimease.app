@@ -16,25 +16,25 @@ interface UpsellModalProps {
 export function UpsellModal({ isOpen, onClose, onPurchase, onContinueFree }: UpsellModalProps) {
   const { user } = useUser();
   
-  const isUnlimitedTier = user?.tier === UserTier.UNLIMITED_CLAIMS;
-  const remainingClaims = user ? (user.tier === UserTier.UNLIMITED_CLAIMS ? -1 : Math.max(0, 1 - user.claims_used)) : 0;
+  const isProTier = user?.tier === UserTier.PRO;
+  const remainingClaims = user ? (user.tier === UserTier.PRO ? -1 : Math.max(0, 1 - user.claims_used)) : 0;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-center">
-            {isUnlimitedTier ? 'Unlimited Claims Available' : 'Claim Limit Reached'}
+            {isProTier ? 'Pro Claims Available' : 'Claim Limit Reached'}
           </DialogTitle>
           <DialogDescription className="text-center text-base mt-2">
-            {isUnlimitedTier 
-              ? 'You have unlimited claims with your current plan!'
+            {isProTier 
+              ? 'You have unlimited claims with your Pro plan!'
               : `You've used all ${user?.claims_used || 0} of your included claims.`
             }
           </DialogDescription>
         </DialogHeader>
         
-        {!isUnlimitedTier && (
+        {!isProTier && (
           <div className="space-y-4 py-4">
             <div className="bg-muted/30 rounded-lg p-4 space-y-3">
               <div className="flex items-center gap-3">
@@ -55,43 +55,43 @@ export function UpsellModal({ isOpen, onClose, onPurchase, onContinueFree }: Ups
               Perfect for partners, family members, or new applications
             </div>
             
-            {/* Upgrade to Unlimited Option */}
+            {/* Upgrade to Pro Option */}
             <div className="border rounded-lg p-4 bg-gradient-to-r from-primary/5 to-accent/5">
               <div className="flex items-center gap-2 mb-2">
                 <Crown className="h-4 w-4 text-primary" />
-                <span className="font-medium text-sm">Better Value: Upgrade to Unlimited</span>
+                <span className="font-medium text-sm">Better Value: Upgrade to Pro</span>
               </div>
               <p className="text-xs text-muted-foreground mb-3">
-                Get unlimited claims for just £{PRICING.UNLIMITED_CLAIMS - PRICING.SINGLE_CLAIM} more (total £{PRICING.UNLIMITED_CLAIMS})
+                Get unlimited claims for just £{PRICING.UPGRADE_TO_PRO} more (total £{PRICING.PRO})
               </p>
               <Button 
                 variant="outline" 
                 size="sm" 
                 className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                onClick={onPurchase}
               >
-                Upgrade to Unlimited Claims
+                Upgrade to Pro Claims
               </Button>
             </div>
           </div>
         )}
         
         <div className="flex flex-col gap-3">
-          {!isUnlimitedTier && (
-            <Button 
-              onClick={onPurchase}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Add Another Claim for £{PRICING.ADDITIONAL_CLAIM}
-            </Button>
-          )}
+          <Button 
+            onClick={onPurchase}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+            disabled={isProTier}
+          >
+            <Crown className="h-4 w-4 mr-2" />
+            {isProTier ? 'Pro Plan Active' : `Upgrade to Pro for £${PRICING.UPGRADE_TO_PRO}`}
+          </Button>
           
           <Button 
             variant="outline" 
             onClick={onContinueFree || onClose}
             className="w-full"
           >
-            {isUnlimitedTier ? 'Continue' : 'Maybe Later'}
+            {isProTier ? 'Continue' : 'Maybe Later'}
           </Button>
         </div>
       </DialogContent>

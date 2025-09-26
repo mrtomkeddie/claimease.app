@@ -4,12 +4,12 @@ import { inter, poppins } from '@/lib/fonts';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from '@/components/ui/toaster';
 import { UserProvider } from '@/contexts/UserContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export const metadata = {
   title: 'ClaimEase — Make your PIP claim easier',
   description: 'Turn your daily experiences into clear, DWP‑friendly answers. ClaimEase rewrites your words for PIP in 10–15 minutes. One‑time £49. Free appeal support.',
   robots: 'index,follow',
-  themeColor: '#000000',
   openGraph: {
     type: 'website',
     siteName: 'ClaimEase',
@@ -22,6 +22,10 @@ export const metadata = {
     title: 'ClaimEase — Make your PIP claim easier',
     description: 'Turn your daily experiences into clear, DWP‑friendly answers. One‑time £49. Free appeal support.',
   },
+};
+
+export const viewport = {
+  themeColor: '#000000',
 };
 
 export default function RootLayout({
@@ -40,10 +44,12 @@ export default function RootLayout({
         className={`${inter.className} ${poppins.variable} min-h-screen font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <UserProvider>
-            {children}
-            <Toaster />
-          </UserProvider>
+          <AuthProvider>
+            <UserProvider>
+              {children}
+              <Toaster />
+            </UserProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -20,8 +20,9 @@ function AppContent() {
   const [loadedClaim, setLoadedClaim] = useState<SavedClaim | null>(null);
   const [showUpsellModal, setShowUpsellModal] = useState(false);
   
+  // Enable login for production
   if (!user) {
-    return <Login onLogin={setUser} />;
+    return <Login />;
   }
 
   const handleLoadClaim = (claim: SavedClaim) => {

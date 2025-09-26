@@ -11,8 +11,8 @@ A comprehensive web application for helping users build strong, evidence-backed 
 
 2. **Set up environment variables:**
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+   cp .env.example .env.local
+   # Edit .env.local with your configuration
    ```
 
 3. **Start development server:**
@@ -23,6 +23,32 @@ A comprehensive web application for helping users build strong, evidence-backed 
 4. **Build for production:**
    ```bash
    npm run build
+   ```
+
+## 🔥 Firebase Setup
+
+### Option 1: Demo Mode (Default)
+The app runs in demo mode by default with mock authentication. No Firebase configuration needed.
+
+### Option 2: Real Firebase (Optional)
+1. Create a Firebase project at [firebase.google.com](https://firebase.google.com)
+2. Enable Authentication (Email/Password) and Firestore Database
+3. Copy your Firebase configuration:
+   ```bash
+   # .env.local
+   NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-auth-domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+   ```
+
+4. For local development with Firebase emulators:
+   ```bash
+   npm install -g firebase-tools
+   firebase init emulators
+   firebase emulators:start --only auth,firestore
    ```
 
 ## 📋 Features
@@ -44,34 +70,36 @@ A comprehensive web application for helping users build strong, evidence-backed 
 
 ## 🏗️ Tech Stack
 
-- **React 18** - Modern React with hooks
+- **Next.js 15** - Full-stack React framework
 - **TypeScript** - Type-safe development
 - **Tailwind CSS v4** - Utility-first styling
-- **Vite** - Fast build tool
 - **Shadcn/ui** - Accessible component library
 - **Lucide React** - Icon library
+- **Firebase** - Authentication and database (optional)
 
 ## 📁 Project Structure
 
 ```
-├── components/          # Reusable UI components
-│   ├── ui/             # Shadcn/ui components
-│   └── ...             # Custom components
-├── contexts/           # React contexts
-├── lib/               # Utility functions
-├── styles/            # Global CSS
-└── src/               # Application entry point
+src/
+├── app/               # Next.js app router pages
+├── components/        # Reusable UI components
+│   ├── ui/           # Shadcn/ui components
+│   └── ...           # Custom components
+├── contexts/         # React contexts (UserContext, etc.)
+├── hooks/            # Custom React hooks
+├── lib/              # Utility functions and configurations
+└── styles/           # Global CSS
 ```
 
 ## 🔧 Configuration
 
 ### Environment Variables
-- `VITE_APP_NAME` - Application name
-- `VITE_FIREBASE_*` - Firebase configuration (if using)
-- `VITE_API_BASE_URL` - API endpoint
+Create a `.env.local` file with:
+- `NEXT_PUBLIC_FIREBASE_*` - Firebase configuration (optional)
+- `NODE_ENV` - development/production
 
 ### Build Configuration
-- **Vite:** Modern build tool with HMR
+- **Next.js:** Modern React framework with app router
 - **TypeScript:** Strict type checking
 - **ESLint:** Code linting and formatting
 
@@ -79,13 +107,14 @@ A comprehensive web application for helping users build strong, evidence-backed 
 
 ### Firebase Hosting
 ```bash
-npm run firebase:deploy
+npm run build
+firebase deploy
 ```
 
 ### Other Platforms
 ```bash
 npm run build
-# Deploy the 'dist' folder to your hosting platform
+# Deploy the '.next' folder to your hosting platform
 ```
 
 ## 📱 Browser Support

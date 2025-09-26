@@ -42,21 +42,21 @@ export type StepId = (typeof FORM_STEPS)[number]['id'];
 
 export type StepField = keyof FormValues;
 
-// Pricing and User Tiers
+// Pricing and User Tiers - Updated to Standard/Pro model
 export const PRICING = {
-  SINGLE_CLAIM: 49,
-  ADDITIONAL_CLAIM: 29,
-  UNLIMITED_CLAIMS: 79,
+  STANDARD: 49,
+  PRO: 79,
+  UPGRADE_TO_PRO: 30, // £30 to upgrade from Standard to Pro
 } as const;
 
 export enum UserTier {
-  SINGLE_CLAIM = 'single_claim',
-  UNLIMITED_CLAIMS = 'unlimited_claims',
+  STANDARD = 'standard',
+  PRO = 'pro',
 }
 
 export const CLAIM_LIMITS = {
-  [UserTier.SINGLE_CLAIM]: 1,
-  [UserTier.UNLIMITED_CLAIMS]: -1, // -1 represents unlimited
+  [UserTier.STANDARD]: 1,
+  [UserTier.PRO]: -1, // -1 represents unlimited
 } as const;
 
-export type UserTierType = UserTier.SINGLE_CLAIM | UserTier.UNLIMITED_CLAIMS;
+export type UserTierType = UserTier.STANDARD | UserTier.PRO;

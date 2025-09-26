@@ -27,8 +27,8 @@ export default function AccountPage() {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
   }
 
-  const isStandardTier = user.tier === UserTier.SINGLE_CLAIM;
-  const isProTier = user.tier === UserTier.UNLIMITED_CLAIMS;
+  const isStandardTier = user.tier === UserTier.STANDARD;
+  const isProTier = user.tier === UserTier.PRO;
 
   const handleUpgradeToPro = () => {
     // TODO: Implement payment flow for upgrade
@@ -108,12 +108,12 @@ export default function AccountPage() {
                                     {isStandardTier ? 'ClaimEase Standard' : 'ClaimEase Pro'}
                                 </p>
                                 <p className="text-sm text-muted-foreground">
-                                    £{isStandardTier ? PRICING.SINGLE_CLAIM : PRICING.UNLIMITED_CLAIMS} one-time
+                                    £{isStandardTier ? PRICING.STANDARD : PRICING.PRO} one-time payment
                                 </p>
                             </div>
                             <div className="text-right">
                                 <p className="text-sm font-medium">
-                                    {isProTier ? 'Unlimited claims' : `${user.claims_remaining} claim${user.claims_remaining !== 1 ? 's' : ''} remaining`}
+                                    {isProTier ? 'Unlimited claims' : 'Single claim'}
                                 </p>
                             </div>
                         </div>
@@ -127,21 +127,18 @@ export default function AccountPage() {
                                             <CheckCircle className="h-3 w-3 text-success" />
                                             <span>Unlimited PIP claims</span>
                                         </li>
-                                        <li className="flex items-center gap-2">
-                                            <CheckCircle className="h-3 w-3 text-success" />
-                                            <span>Upload medical documents</span>
-                                        </li>
+    
                                         <li className="flex items-center gap-2">
                                             <CheckCircle className="h-3 w-3 text-success" />
                                             <span>Free appeal support for every claim</span>
                                         </li>
                                     </ul>
                                     <p className="text-xs text-muted-foreground">
-                                        Just £{PRICING.UNLIMITED_CLAIMS - PRICING.SINGLE_CLAIM} more (total £{PRICING.UNLIMITED_CLAIMS})
+                                        Upgrade for £{PRICING.UPGRADE_TO_PRO} more
                                     </p>
                                 </div>
                                 <Button onClick={handleUpgradeToPro} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                                    Upgrade to Pro for £{PRICING.UNLIMITED_CLAIMS} →
+                                    Upgrade to Pro for £{PRICING.UPGRADE_TO_PRO} →
                                 </Button>
                             </div>
                         )}

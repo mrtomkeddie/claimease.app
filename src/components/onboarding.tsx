@@ -65,7 +65,7 @@ export function Onboarding({ onComplete }: OnboardingProps) {
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       pip_focus: ['PIP (Personal Independence Payment)'],
       created_at: new Date().toISOString(),
-      tier: selectedPlan === 'pro' ? UserTier.UNLIMITED : UserTier.SINGLE_CLAIM,
+      tier: selectedPlan === 'pro' ? UserTier.PRO : UserTier.STANDARD,
       claims_used: 0, // Start with 0 claims used
       claims_remaining: selectedPlan === 'pro' ? -1 : 1, // Pro gets unlimited (-1), Standard gets 1
     };

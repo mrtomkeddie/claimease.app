@@ -26,7 +26,7 @@ export function TopMenu() {
   }
 
   const remainingClaims = getRemainingClaims();
-  const isUnlimitedTier = user?.tier === UserTier.UNLIMITED_CLAIMS;
+  const isProTier = user?.tier === UserTier.PRO;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
@@ -49,16 +49,16 @@ export function TopMenu() {
           <nav className="flex items-center gap-2">
             {user && (
               <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 rounded-full text-sm">
-                {isUnlimitedTier ? (
+                {isProTier ? (
                   <>
                     <Crown className="h-4 w-4 text-primary" />
-                    <span className="font-medium text-primary">Unlimited</span>
+                    <span className="font-medium text-primary">Pro</span>
                   </>
                 ) : (
                   <>
                     <FileText className="h-4 w-4 text-muted-foreground" />
                     <span className="font-medium">
-                      {remainingClaims} claim{remainingClaims !== 1 ? 's' : ''} left
+                      Standard
                     </span>
                   </>
                 )}

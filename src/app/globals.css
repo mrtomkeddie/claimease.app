@@ -34,13 +34,13 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 6.7%;
     --popover-foreground: 0 0% 98%;
-    --primary: 180 45% 30%;
+    --primary: 180 45% 30%; /* Original teal/cyan brand color */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 9%;
     --muted-foreground: 240 4% 63%;
-    --accent: 157 44% 81%;
+    --accent: 157 44% 81%; /* Original light teal accent */
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -48,6 +48,8 @@
     --input: 0 0% 10%;
     --ring: 180 45% 30%;
     --radius: 0.75rem;
+    --tertiary: 180 45% 20%; /* Original tertiary teal */
+    --tertiary-foreground: 0 0% 98%;
   }
 }
 
@@ -216,14 +218,23 @@
 }
 
 .gradient-dark-brand {
-  background: 
-    radial-gradient(
-      ellipse 800px 600px at top left, 
-      hsla(var(--primary), 0.08) 0%, 
-      hsla(var(--primary), 0.04) 30%, 
-      transparent 60%
-    ),
-    hsl(var(--background));
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--tertiary)) 100%);
+}
+
+.gradient-dark-subtle {
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--secondary) / 0.05) 100%);
+}
+
+.gradient-green-glow {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+}
+
+.gradient-green-subtle {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%);
+}
+
+.gradient-green-accent {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
 }
 
 /* Enhanced hover effects for black theme */
@@ -250,7 +261,7 @@
 .btn-brand:hover {
   background: color-mix(in srgb, hsl(var(--primary)) 85%, white);
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px hsla(var(--primary), 0.6);
+  box-shadow: 0 8px 25px hsla(var(--primary), 0.4);
 }
 
 .btn-accent {
